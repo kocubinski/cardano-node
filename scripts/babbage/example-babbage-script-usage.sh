@@ -21,7 +21,7 @@ ls -al "$CARDANO_NODE_SOCKET_PATH"
 plutusspendingscript="$BASE/scripts/plutus/scripts/v2/required-redeemer.plutus"
 plutusmintingscript="$BASE/scripts/plutus/scripts/v2/minting-script.plutus"
 plutusstakescript="scripts/plutus/scripts/v2/stake-script.plutus"
-mintpolicyid=$($CARDANO_CLI transaction policyid --script-file $plutusmintingscript)
+mintpolicyid=$($CARDANO_CLI conway transaction policyid --script-file $plutusmintingscript)
 ## This datum hash is the hash of the untyped 42
 scriptdatumhash="9e1199a988ba72ffd6e9c269cadb3b53b5f360ff99f112d9b2ee30c4d74ad88b"
 datumfilepath="$BASE/scripts/plutus/data/42.datum"
@@ -58,8 +58,7 @@ readonlyaddress=addr_test1vz3t3f2kgy2re66tnhgxc4t8jgylw2cqfnxdwlrq9agfmtstxxkm5
 # We first:
 # - Create the reference script at the utxoaddr
 # - Send ADA and a datum to the reference script address
-$CARDANO_CLI transaction build \
-  --babbage-era \
+$CARDANO_CLI conway transaction build \
   --cardano-mode \
   --testnet-magic "$TESTNET_MAGIC" \
   --change-address "$utxoaddr" \
@@ -77,14 +76,14 @@ $CARDANO_CLI transaction build \
   --tx-out-reference-script-file "$plutusmintingscript" \
   --out-file "$WORK/create-datum-output.body"
 
-$CARDANO_CLI transaction sign \
+$CARDANO_CLI conway transaction sign \
   --tx-body-file $WORK/create-datum-output.body \
   --testnet-magic "$TESTNET_MAGIC" \
   --signing-key-file $UTXO_SKEY \
   --out-file $WORK/create-datum-output.tx
 
 # SUBMIT
-$CARDANO_CLI transaction submit --tx-file $WORK/create-datum-output.tx --testnet-magic "$TESTNET_MAGIC"
+$CARDANO_CLI conway transaction submit --tx-file $WORK/create-datum-output.tx --testnet-magic "$TESTNET_MAGIC"
 echo "Pausing for 5 seconds..."
 sleep 5
 
@@ -160,8 +159,7 @@ returncollateral=$(expr $suppliedCollateral - 529503)
 echo "Return collateral amount"
 echo "$returncollateral"
 
-$CARDANO_CLI transaction build \
-  --babbage-era \
+$CARDANO_CLI conway transaction build \
   --cardano-mode \
   --testnet-magic "$TESTNET_MAGIC" \
   --change-address "$utxoaddr" \
@@ -183,7 +181,7 @@ $CARDANO_CLI transaction build \
   --policy-id "$mintpolicyid" \
   --tx-out "$dummyaddress2+10000000 + 5 $mintpolicyid.4D696C6C6172436F696E" 
 
-$CARDANO_CLI transaction sign \
+$CARDANO_CLI conway transaction sign \
   --tx-body-file $WORK/test-alonzo-ref-script.body \
   --testnet-magic "$TESTNET_MAGIC" \
   --signing-key-file "${UTXO_SKEY}" \
@@ -191,7 +189,7 @@ $CARDANO_CLI transaction sign \
 
 # SUBMIT $WORK/alonzo.tx
 echo "Submit the tx using reference script and wait 5 seconds..."
-$CARDANO_CLI transaction submit --tx-file $WORK/alonzo-ref-script.tx --testnet-magic "$TESTNET_MAGIC"
+$CARDANO_CLI conway transaction submit --tx-file $WORK/alonzo-ref-script.tx --testnet-magic "$TESTNET_MAGIC"
 sleep 5
 echo ""
 echo "Querying UTxO at $dummyaddress2. If there is ADA at the address the Plutus reference script successfully executed!"
