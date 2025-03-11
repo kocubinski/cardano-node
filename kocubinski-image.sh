@@ -15,3 +15,5 @@ if [ $? -eq 0 ]; then
   echo "Current tag: $GITTAG"
   docker tag kocubinski/cardano-node:dev "kocubinski/cardano-node:$GITTAG"
 fi
+
+docker push kocubinski/cardano-node:$GITTAG
