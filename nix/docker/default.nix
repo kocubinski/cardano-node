@@ -53,6 +53,7 @@
 , lib
 , exe
 , script
+, jq
 , repoName ? "inputoutput/${exe}"
 }:
 
@@ -76,6 +77,7 @@ let
         iputils           # Useful utilities for Linux networking
         socat             # Utility for bidirectional data transfer
         utillinux         # System utilities for Linux
+	      jq
       ];
     };
     # set up /tmp (override with TMPDIR variable)
