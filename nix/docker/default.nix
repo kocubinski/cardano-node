@@ -51,6 +51,11 @@
 , lib
 , exe
 , script
+, jq
+, gnused
+, gawk
+, zstd
+, wget
 , repoName ? "ghcr.io/intersectmbo/${exe}"
 }:
 
@@ -65,7 +70,7 @@ let
       paths = [
         cardano-cli       # Provide cardano-cli capability
         bashInteractive   # Provide the BASH shell
-        cacert            # X.509 certificates of public CA's
+        cacert            # X.509 certificates of public CA'scat
         coreutils         # Basic utilities expected in GNU OS's
         curl              # CLI tool for transferring files via URLs
         glibcLocales      # Locale information for the GNU C Library
@@ -74,6 +79,9 @@ let
         iputils           # Useful utilities for Linux networking
         socat             # Utility for bidirectional data transfer
         utillinux         # System utilities for Linux
+	      jq
+        gnused
+        gawk
       ];
     };
     # set up /tmp (override with TMPDIR variable)
