@@ -53,6 +53,9 @@
 , lib
 , exe
 , script
+, jq
+, gnused
+, gawk
 , repoName ? "inputoutput/${exe}"
 }:
 
@@ -76,6 +79,9 @@ let
         iputils           # Useful utilities for Linux networking
         socat             # Utility for bidirectional data transfer
         utillinux         # System utilities for Linux
+	      jq
+        gnused
+        gawk
       ];
     };
     # set up /tmp (override with TMPDIR variable)
