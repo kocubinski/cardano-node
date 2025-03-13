@@ -55,7 +55,7 @@
 , script
 , jq
 , gnused
-, go
+, gawk
 , repoName ? "inputoutput/${exe}"
 }:
 
@@ -81,7 +81,7 @@ let
         utillinux         # System utilities for Linux
 	      jq
         gnused
-        go
+        gawk
       ];
     };
     # set up /tmp (override with TMPDIR variable)
