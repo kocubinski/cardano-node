@@ -54,6 +54,8 @@
 , exe
 , script
 , jq
+, gnused
+, go
 , repoName ? "inputoutput/${exe}"
 }:
 
@@ -78,6 +80,8 @@ let
         socat             # Utility for bidirectional data transfer
         utillinux         # System utilities for Linux
 	      jq
+        gnused
+        go
       ];
     };
     # set up /tmp (override with TMPDIR variable)

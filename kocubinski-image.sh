@@ -16,4 +16,4 @@ if [ $? -eq 0 ]; then
   docker tag kocubinski/cardano-node:dev "kocubinski/cardano-node:$GITTAG"
 fi
 
-docker push kocubinski/cardano-node:$GITTAG
+# docker push kocubinski/cardano-node:$GITTAG
